@@ -1,10 +1,8 @@
 import React, { useRef, useEffect } from 'react';
-import { FaSearch, FaTimes } from 'react-icons/fa';
 
 function SearchBar({ searchTerm, onSearchChange }) {
   const inputRef = useRef(null);
 
-  // Automatic focus on the search input on mount
   useEffect(() => {
     if (inputRef.current) {
       inputRef.current.focus();
@@ -24,26 +22,25 @@ function SearchBar({ searchTerm, onSearchChange }) {
         Tìm kiếm phim / Search Movie:
       </label>
       <div className="input-group">
-        <span className="input-group-text">
-          <FaSearch />
-        </span>
         <input
           id="movie-search-input"
           ref={inputRef}
           type="text"
-          className="form-control"
+          className="form-control shadow-none"
+          style={{ boxShadow: 'none', borderColor: '#ced4da' }}
           placeholder="Tìm tên phim..."
           value={searchTerm}
           onChange={(e) => onSearchChange(e.target.value)}
         />
         {searchTerm && (
           <button
-            className="btn btn-outline-secondary"
+            className="btn btn-outline-secondary shadow-none"
             type="button"
             onClick={handleClear}
             title="Xóa tìm kiếm"
+            style={{ boxShadow: 'none' }}
           >
-            <FaTimes />
+            Xóa
           </button>
         )}
       </div>
