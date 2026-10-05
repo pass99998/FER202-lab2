@@ -1,69 +1,47 @@
 import React, { useContext } from 'react';
 import { ThemeContext } from '../context/ThemeContext';
-import { FaStar, FaInfoCircle, FaHeart, FaRegHeart } from 'react-icons/fa';
 
-function MovieItem({ movie, isFavorite, onToggleFavorite, onSelectMovie, isSelected }) {
+function MovieItem({ movie, isFavorite, onToggleFavorite, onSelectMovie }) {
   const { theme } = useContext(ThemeContext);
 
-  const cardBg = theme === 'dark' 
-    ? (isSelected ? 'bg-secondary bg-opacity-25 border-primary' : 'bg-dark text-white border-secondary') 
-    : (isSelected ? 'bg-primary bg-opacity-10 border-primary' : 'bg-white text-dark border-light-subtle');
+  const itemBg = theme === 'dark' 
+    ? 'bg-dark text-white border-secondary' 
+    : 'bg-white text-dark border-light-subtle';
 
   return (
-    <div className={`card mb-3 shadow-sm transition-all ${cardBg} ${isSelected ? 'border-2' : ''}`}>
-      <div className="card-body">
-        <div className="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-2">
-          {/* Movie summary: Title | Genre | Year | Rating */}
-          <div className="flex-grow-1">
-            <div className="d-flex align-items-center gap-2 mb-1 flex-wrap">
-              {isFavorite && (
-                <FaStar className="text-warning" title="Phim yêu thích" />
-              )}
-              <h5 className="card-title mb-0 fw-bold">{movie.title}</h5>
-            </div>
-            
-            <div className="text-muted d-flex align-items-center gap-2 flex-wrap small">
-              <span className="badge bg-info text-dark">{movie.genre}</span>
-              <span>•</span>
-              <span>Năm: <strong>{movie.year}</strong></span>
-              <span>•</span>
-              <span className="d-flex align-items-center gap-1 text-warning fw-bold">
-                <FaStar /> {movie.rating}
-              </span>
-            </div>
-          </div>
+    <div className={`list-group-item px-3 py-3 ${itemBg}`}>
+      {/* Dòng 1: Tiêu đề bên trái, các thông tin bên phải */}
+      <div className="d-flex justify-content-between align-items-center mb-2 flex-wrap gap-2">
+        <h5 className="mb-0 fw-bold">{movie.title}</h5>
 
-          {/* Action buttons: [Favorite] | [View Details] */}
-          <div className="d-flex align-items-center gap-2 mt-2 mt-md-0">
-            <button
-              onClick={() => onToggleFavorite(movie.id)}
-              className={`btn btn-sm d-flex align-items-center gap-1 ${
-                isFavorite ? 'btn-danger' : 'btn-outline-danger'
-              }`}
-              title={isFavorite ? 'Bỏ thích' : 'Yêu thích'}
-            >
-              {isFavorite ? (
-                <>
-                  <FaHeart /> Bỏ thích
-                </>
-              ) : (
-                <>
-                  <FaRegHeart /> Yêu thích
-                </>
-              )}
-            </button>
-
-            <button
-              onClick={() => onSelectMovie(movie)}
-              className={`btn btn-sm d-flex align-items-center gap-1 ${
-                isSelected ? 'btn-primary' : 'btn-outline-primary'
-              }`}
-              title="Xem chi tiết"
-            >
-              <FaInfoCircle /> Chi tiết
-            </button>
-          </div>
+        <div className="text-muted d-flex align-items-center gap-3 flex-wrap small">
+          <span>{movie.genre}</span>
+          <span>{movie.year}</span>
+          <span className="text-warning fw-bold">
+            {movie.rating}
+          </span>
         </div>
+      </div>
+
+      {/* Dòng 2: Nút bấm căn chỉnh lệch về phía bên phải dưới các thông tin */}
+      <div className="d-flex justify-content-end align-items-center gap-2">
+        <button
+          onClick={() => onToggleFavorite(movie.id)}
+          className={`btn btn-sm ${
+            isFavorite ? 'btn-danger' : 'btn-outline-danger'
+          }`}
+          title={isFavorite ? 'Bỏ thích' : 'Yêu thích'}
+        >
+          {isFavorite ? 'Bỏ thích' : 'Yêu thích'}
+        </button>
+
+        <button
+          onClick={() => onSelectMovie(movie)}
+          className="btn btn-sm btn-outline-primary"
+          title="Xem chi tiết"
+        >
+          Chi tiết
+        </button>
       </div>
     </div>
   );
