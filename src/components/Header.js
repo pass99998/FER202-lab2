@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { ThemeContext } from '../context/ThemeContext';
-import { FaMoon, FaSun, FaFilm } from 'react-icons/fa';
+import { FaMoon, FaSun } from 'react-icons/fa';
 
 function Header() {
   const { theme, toggleTheme } = useContext(ThemeContext);
@@ -8,7 +8,6 @@ function Header() {
   return (
     <header className={`header py-3 px-4 mb-4 border-bottom d-flex justify-content-between align-items-center ${theme === 'dark' ? 'bg-dark text-white border-secondary' : 'bg-light text-dark'}`}>
       <div className="d-flex align-items-center gap-2">
-        <FaFilm className="text-primary fs-3" />
         <h1 className="h3 mb-0 fw-bold">Movie Manager</h1>
       </div>
       <button
