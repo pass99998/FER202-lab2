@@ -20,7 +20,8 @@ function GenreFilter({ selectedGenre, onGenreChange, sortBy, onSortChange }) {
         </label>
         <select
           id="genre-select"
-          className="form-select"
+          className="form-select shadow-none"
+          style={{ boxShadow: 'none' }}
           value={selectedGenre}
           onChange={(e) => onGenreChange(e.target.value)}
         >
@@ -40,7 +41,8 @@ function GenreFilter({ selectedGenre, onGenreChange, sortBy, onSortChange }) {
           </label>
           <select
             id="sort-select"
-            className="form-select"
+            className="form-select shadow-none"
+            style={{ boxShadow: 'none' }}
             value={sortBy}
             onChange={(e) => onSortChange(e.target.value)}
           >
